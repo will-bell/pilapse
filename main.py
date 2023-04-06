@@ -4,6 +4,7 @@ import time
 from camera import CameraHandler
 from dotenv import load_dotenv
 from typing import Optional
+import numpy as np
 
 from scheduler import Scheduler
 
@@ -16,9 +17,17 @@ app = Flask(__name__)
 
 @app.route('/latest_image')
 def latest_image():
-  latest_image = os.listdir(IMAGES_DIR)[-1]
-  print(latest_image)
-  return send_from_directory('images', latest_image)
+  images = os.listdir(IMAGES_DIR)
+  
+  latestind = 0
+  maxctime = -1
+  for ind, image in enumerate(images):
+    ctime = os.path.getctime(os.path.join(IMAGES_DIR, image))
+    if ctime > maxctime:
+      latestind = ind
+      maxctime = ctime
+    
+  return send_from_directory('images', images[latestind])
 
 @app.route('/')
 def index():
