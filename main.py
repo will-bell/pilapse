@@ -34,7 +34,7 @@ def index():
   return render_template('index.html', latest_image=url_for('latest_image'))
 
 def take_a_picture(logger: Optional[Logger] = None):
-  with CameraHandler() as camera:
+  with CameraHandler((2200, 1238)) as camera:
     camera.capture_file(f'images/noise_at_{time.time()}.jpg')
     
   if logger:

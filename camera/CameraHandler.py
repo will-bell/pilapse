@@ -14,7 +14,7 @@ class CameraHandler(object):
   def __enter__(self):
     self._cameraimpl = new_camera(self._size)
     
-    self._cameraimpl.start()
+    self._cameraimpl.start("still")
     time.sleep(2)
     return self._cameraimpl
   
