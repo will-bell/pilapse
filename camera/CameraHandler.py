@@ -1,15 +1,19 @@
+from typing import Any, Tuple
 import time
 from typing import Optional
-from camera import Camera
+from camera import new_camera
 
 class CameraHandler(object):
-  _cameraimpl: Optional[Camera]
-
-  def __init__(self):
+  _cameraimpl: Optional[Any]
+  _size: Tuple[int, int]
+  
+  def __init__(self, size: Tuple[int, int] = (1600, 1200)):
     self._cameraimpl = None
+    self._size = size
     
   def __enter__(self):
-    self._cameraimpl = Camera()
+    self._cameraimpl = new_camera(self._size)
+    
     self._cameraimpl.start()
     time.sleep(2)
     return self._cameraimpl

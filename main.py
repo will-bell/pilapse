@@ -44,6 +44,6 @@ if __name__ == '__main__':
   load_dotenv('.env')
   logger = logging.getLogger(__name__)
   
-  Scheduler([(take_a_picture, 10)], logger).run()
+  Scheduler([(take_a_picture, 2)], logger).run()
   
   app.run(host='0.0.0.0', debug=False)

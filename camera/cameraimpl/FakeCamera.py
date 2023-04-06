@@ -1,3 +1,4 @@
+from typing import Any
 import numpy as np
 from PIL import Image
 
@@ -6,7 +7,7 @@ def random100by100(file_output: str) -> None:
   im = Image.fromarray(imarray.astype('uint8')).convert('RGB')
   im.save(file_output)
 
-class Camera:
+class MockCamera:
     def start(self) -> None:
       print("'Starting' camera")
     
@@ -16,3 +17,4 @@ class Camera:
     def capture_file(self, file_output: str, name: str = "main"):
       print(f"'Capturing' image and writing to {file_output}")
       random100by100(file_output)
+  
