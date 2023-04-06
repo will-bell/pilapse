@@ -17,6 +17,7 @@ app = Flask(__name__)
 @app.route('/latest_image')
 def latest_image():
   latest_image = os.listdir(IMAGES_DIR)[-1]
+  print(latest_image)
   return send_from_directory('images', latest_image)
 
 @app.route('/')
@@ -36,4 +37,4 @@ if __name__ == '__main__':
   
   Scheduler([(take_a_picture, 10)], logger).run()
   
-  app.run(debug=False)
+  app.run(host='0.0.0.0', debug=False)
