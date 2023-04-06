@@ -12,7 +12,7 @@ class Timer:
   
   def __init__(self, func: EventFuncType, wait_interval: float, logger: Optional[Logger]):
     self._func = func
-    self._last_time = time.time()
+    self._last_time = time.time() - wait_interval # to start us off
     self._wait_interval = wait_interval
     self._logger = logger
   

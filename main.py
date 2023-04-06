@@ -34,8 +34,9 @@ def index():
   return render_template('index.html', latest_image=url_for('latest_image'))
 
 def take_a_picture(logger: Optional[Logger] = None):
+  print("Taking a picture")
   with CameraHandler((2200, 1238)) as camera:
-    camera.capture_file(f'images/noise_at_{time.time()}.jpg')
+    camera.capture_file(f'images/image_at_{time.time()}.jpg')
     
   if logger:
     logger.info("Took a picture")
@@ -44,6 +45,6 @@ if __name__ == '__main__':
   load_dotenv('.env')
   logger = logging.getLogger(__name__)
   
-  Scheduler([(take_a_picture, 2)], logger).run()
+  Scheduler([(take_a_picture, 1800)], logger).run()
   
   app.run(host='0.0.0.0', debug=False)
